@@ -1,161 +1,156 @@
-# Hua4GMon — портативный монитор LTE для роутеров Huawei
+# Hua4GMon — portatīvs LTE monitors Huawei rūteriem
 
-![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-blue)
+![Platforma](https://img.shields.io/badge/platforma-Windows%2010%2F11-blue)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+![Licence](https://img.shields.io/badge/licence-MIT-green)
 
-Tkinter-утилита для мониторинга 4G-роутеров Huawei (E3372, B315, B525,
-B535, B628, B818 и совместимых). Сделана под задачи **монтажников антенн**:
-помогает в реальном времени увидеть, как меняется сигнал при повороте
-антенны, выбрать лучшую базовую станцию и зафиксировать результат
-отчётом клиенту.
+Tkinter rīks Huawei 4G rūteru (E3372, B315, B525, B535, B628, B818 un
+saderīgo) monitoringam. Veidots **antenu montieriem** — palīdz reāllaikā
+redzēt, kā mainās signāls pagriežot antenu, izvēlēties labāko bāzes staciju
+un fiksēt rezultātu klienta atskaitē.
 
-## Что умеет
+> Šī ir latviskota versija ar Latvijas operatoru atbalstu (LMT, Tele2, Bite).
 
-- **Мониторинг параметров LTE:** RSRP, RSSI, RSRQ, SINR, скорости DL/UL,
-  трафик за сессию, температура чипа, время сессии.
-- **Индикатор тенденции** (↑ / → / ↓) — главный инструмент монтажа:
-  показывает, улучшается ли сигнал при повороте антенны.
-- **«Крышный режим»** — полноэкранные крупные цифры, видны с расстояния
-  при работе с антенной на крыше.
-- **Аудио-помощник** — частота сигнала зависит от близости к пику RSRP:
-  чем выше тон, тем ближе к лучшему положению антенны (Windows).
-- **Информация о вышке:** оператор по PLMN, рабочий LTE-Band с частотой,
-  EARFCN, агрегация (CA), eNodeB, локальный сектор, PCI.
-  + быстрый переход на CellMapper.
-- **Информация о SIM/устройстве:** IMEI роутера, IMSI и ICCID SIM,
-  серийный номер, модель, версия прошивки.
-- **Band Lock и переключение антенн** (внутренняя/внешняя/смешанная)
-  через API роутера.
-- **Перезагрузка роутера** одной кнопкой (полезно после Band Lock).
-- **Тест белых списков (РФ):** определяет, включён ли на БС режим, при
-  котором работают только сайты из перечня Минцифры.
-- **Экспорт сессии в CSV** для отчёта клиенту.
-- **Авто-переподключение** при обрыве связи с роутером.
+## Ko prot
 
-## Запуск
+- **LTE parametru monitorings:** RSRP, RSSI, RSRQ, SINR, DL/UL ātrumi,
+  sesijas trafiks, mikroshēmas temperatūra, sesijas laiks.
+- **Tendences indikators** (↑ / → / ↓) — galvenais montāžas rīks:
+  parāda, vai signāls uzlabojas pagriežot antenu.
+- **"Jumta režīms"** — pilnekrāna lieli skaitļi, redzami no attāluma
+  strādājot ar antenu uz jumta.
+- **Audio palīgs** — signāla frekvence atkarīga no tuvuma RSRP maksimumam:
+  jo augstāks tonis, jo tuvāk labākajai antenas pozīcijai (Windows).
+- **Informācija par torni:** operators pēc PLMN, darba LTE-Band ar frekvenci,
+  EARFCN, agregācija (CA), eNodeB, lokālais sektors, PCI.
+  + ātra pāreja uz CellMapper.
+- **SIM/ierīces informācija:** rūtera IMEI, SIM IMSI un ICCID,
+  sērijas numurs, modelis, programmaparatūras versija.
+- **Band Lock un antenu pārslēgšana** (iekšējā/ārējā/jaukta)
+  caur rūtera API.
+- **Rūtera pārstartēšana** ar vienu pogu (noderīgi pēc Band Lock).
+- **Sesijas eksports CSV** formātā klienta atskaitei.
+- **Automātiska pārpieslēgšanās** ja pazūd savienojums ar rūteri.
 
-### Готовый .exe (Windows)
+## Palaišana
 
-1. Скачать `Hua4GMon.exe` из [Releases].
-2. Положить в любую папку.
-3. Запустить.
+### Gatavs .exe (Windows)
 
-**Если Windows ругается «Неизвестный издатель»** — это нормально для
-неподписанных .exe. См. раздел [Windows SmartScreen](#windows-smartscreen)
-ниже.
+1. Lejupielādēt `Hua4GMon.exe` no [Releases].
+2. Ielikt jebkurā mapē.
+3. Palaist.
 
-[Releases]: https://github.com/Sp0Xik/Hua4GMon/releases
+**Ja Windows brīdina "Nezināms izdevējs"** — tas ir normāli
+neparakstītiem .exe failiem. Sk. sadaļu [Windows SmartScreen](#windows-smartscreen)
+zemāk.
 
-### Из исходников (любая ОС с Tk)
+[Releases]: https://github.com/Anabauris/Hua4GMon/releases
+
+### No avota koda (jebkura OS ar Tk)
 
 ```bash
-git clone https://github.com/Sp0Xik/Hua4GMon
+git clone https://github.com/Anabauris/Hua4GMon
 cd Hua4GMon
 pip install -r requirements.txt
 python main.py
 ```
 
-### CLI-флаги
+### CLI karodziņi
 
 ```
 python main.py --ip 192.168.1.1 --password admin
-python main.py --verbose          # подробный лог в stderr
+python main.py --verbose          # detalizēts žurnāls stderr
 python main.py --version
 ```
 
-При указанном `--password` программа подключается автоматически — удобно
-сделать ярлык на конкретного клиента.
+Ja norādīts `--password`, programma pieslēdzas automātiski — ērti
+izveidot saīsni konkrētam klientam.
 
-## Использование
+## Lietošana
 
-1. Откройте вкладку **⚙️ Подключение**, введите IP (по умолчанию
-   `192.168.8.1`, для B315/B525 — `192.168.1.1`) и пароль роутера
-   (со стикера). Нажмите **🚀 Подключиться** или просто Enter в поле
-   пароля.
-2. Перейдите на **📈 Монитор**. Вверху — общая оценка качества связи,
-   ниже — большие цифры RSRP/RSSI/SINR/RSRQ с пиками, и крупная стрелка
-   тенденции. Двигайте антенну, ориентируясь на стрелку (↑ = лучше).
-   Внизу — график выбранного параметра.
-3. Вкладка **🗼 Вышка** показывает, к какой БС вы подключены: оператор,
-   band с частотой, EARFCN, eNodeB-ID, а также IMEI/IMSI/ICCID. Кнопка
-   «Открыть на CellMapper» подскажет координаты вышки.
-4. Когда нашли лучшее положение — можно зафиксировать выбор частоты на
-   **🎛️ Сеть** через Band Lock и/или принудительно переключить антенну
-   на внешнюю. Там же — кнопка перезагрузки роутера.
-5. **🛡 Белые списки (РФ)** — быстрая диагностика, включён ли на БС
-   режим фильтрации. TCP-пробы на 443 порт `gosuslugi.ru` / `sber.ru`
-   и нейтральных сайтов; по таблице истинности определяем режим.
-6. Для отчёта клиенту — кнопка **💾 Экспорт CSV** на вкладке монитора.
+1. Atveriet cilni **⚙️ Savienojums**, ievadiet IP (pēc noklusējuma
+   `192.168.8.1`, B315/B525 — `192.168.1.1`) un rūtera paroli
+   (no uzlīmes). Nospiediet **🚀 Pieslēgties** vai vienkārši Enter
+   paroles laukā.
+2. Pārejiet uz **📈 Monitors**. Augšā — vispārējs savienojuma kvalitātes
+   vērtējums, zemāk — lieli RSRP/RSSI/SINR/RSRQ skaitļi ar maksimumiem
+   un liela tendences bulta. Kustiniet antenu vadoties pēc bultas
+   (↑ = labāk). Apakšā — izvēlētā parametra grafiks.
+3. Cilne **🗼 Tornis** parāda, pie kuras bāzes stacijas esat pieslēgti:
+   operators, band ar frekvenci, EARFCN, eNodeB-ID, kā arī IMEI/IMSI/ICCID.
+   Poga "Atvērt CellMapper" norādīs torņa koordinātes.
+4. Kad atrasta labākā pozīcija — var fiksēt frekvences izvēli
+   **🎛️ Tīkls** caur Band Lock un/vai piespiedu kārtā pārslēgt antenu
+   uz ārējo. Tur arī ir rūtera pārstartēšanas poga.
+5. Klienta atskaitei — poga **💾 Eksportēt CSV** monitora cilnē.
 
 ## Windows SmartScreen
 
-При первом запуске неподписанного .exe Windows показывает:
+Pirmoreiz palaižot neparakstītu .exe, Windows parāda:
 
-> «Защитник Windows предотвратил запуск неизвестного приложения»
+> «Windows Defender neļāva palaist nezināmu lietotni»
 
-Это **не вирус** — это политика для всех неподписанных бинарей.
-Сертификат для подписи стоит ~$300/год и для opensource-проекта пока
-не оправдан. Чтобы запустить:
+Tas **nav vīruss** — tā ir politika visiem neparakstītiem binārajiem
+failiem. Parakstīšanas sertifikāts maksā ~$300/gadā un atvērtā koda
+projektam pagaidām nav attaisnojams. Lai palaistu:
 
-1. Нажмите **«Подробнее»** в окне предупреждения.
-2. Нажмите **«Выполнить в любом случае»**.
+1. Nospiediet **«Plašāka informācija»** brīdinājuma logā.
+2. Nospiediet **«Palaist jebkurā gadījumā»**.
 
-Windows запомнит выбор и больше предупреждать не будет.
+Windows atcerēsies izvēli un vairs nebrīdinās.
 
-Если файл «заблокирован» (Properties → Unblock), можно снять блокировку
-одной командой в PowerShell:
+Ja fails ir "bloķēts" (Properties → Unblock), var noņemt bloķēšanu
+ar vienu PowerShell komandu:
 
 ```powershell
 Unblock-File .\Hua4GMon.exe
 ```
 
-**Для параноиков:** в Release-постах публикуется SHA256-хеш .exe.
-Можно проверить:
+**Pārliecināšanās:** Release ierakstos tiek publicēts .exe SHA256 hash.
+Var pārbaudīt:
 
 ```powershell
 Get-FileHash .\Hua4GMon.exe
 ```
 
-## Протестированные роутеры
+## Pārbaudītie rūteri
 
-| Модель      | Прошивка       | Статус       |
-| :---------- | :------------- | :----------- |
-| E3372h-153  | 21.x           | ✅ работает  |
-| B315s-22    | 21.x           | ✅ работает  |
-| B525s-23a   | 21.x           | ✅ работает  |
-| B535-232    | 11.x (Stick)   | ✅ работает  |
-| B636-336    | 21.x           | ✅ работает  |
+| Modelis     | Programmaparatūra | Statuss      |
+| :---------- | :---------------- | :----------- |
+| E3372h-153  | 21.x              | ✅ strādā    |
+| B315s-22    | 21.x              | ✅ strādā    |
+| B525s-23a   | 21.x              | ✅ strādā    |
+| B535-232    | 11.x (Stick)      | ✅ strādā    |
+| B636-336    | 21.x              | ✅ strādā    |
 
-Если у вас другая модель — откройте Issue, добавим в список.
+Ja jums ir cits modelis — atveriet Issue, pievienosim sarakstam.
 
-## Зависимости
+## Atkarības
 
 - Python 3.10+
-- [huawei-lte-api](https://github.com/Salamek/huawei-lte-api) — клиент
-  к веб-API роутеров Huawei.
+- [huawei-lte-api](https://github.com/Salamek/huawei-lte-api) — klients
+  Huawei rūteru tīmekļa API.
 
-
-## Сборка .exe из исходников
+## .exe veidošana no avota koda
 
 ```bash
 pip install pyinstaller
 pyinstaller --onefile --windowed --noupx --name Hua4GMon main.py
 ```
 
-Готовый exe в `dist/Hua4GMon.exe` — один файл, portable, можно копировать
-куда угодно.
+Gatavais exe `dist/Hua4GMon.exe` — viens fails, portatīvs, var kopēt
+jebkur.
 
-CI на GitHub Actions делает это автоматически на push тега `vX.Y.Z` —
-см. `.github/workflows/build.yml`.
+GitHub Actions to dara automātiski uz push taga `vX.Y.Z` —
+sk. `.github/workflows/build_lv.yml`.
 
-## Лицензия
+## Licence
 
-MIT — см. [LICENSE](LICENSE).
+MIT — sk. [LICENSE](LICENSE).
 
-## Вклад
+## Ieguldījums
 
-Pull-request'ы и issue приветствуются. Особенно ценны:
-- результаты тестирования на необычных моделях Huawei;
-- скриншоты крашей и логи `--verbose` для багов;
-- обновления списков PLMN для разных стран.
+Pull-requesti un issue ir laipni gaidīti. Īpaši vērtīgi:
+- testēšanas rezultāti uz neierastiem Huawei modeļiem;
+- avāriju ekrānuzņēmumi un `--verbose` žurnāli kļūdām;
+- PLMN sarakstu atjauninājumi dažādām valstīm.
